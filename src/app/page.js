@@ -3,6 +3,7 @@ import LatestBlogs from "./components/LatestBlogs";
 import TravelTips from "./components/TravelTips";
 import Toolkits from "./components/Toolkits";
 import TravelTypes from "./components/TravelTypes";
+import Gallery from "./components/Gallery";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <LatestBlogs />
       <TravelTips />
       <Toolkits />
+      <Gallery />
       <TravelTypes />
     </div>
   );

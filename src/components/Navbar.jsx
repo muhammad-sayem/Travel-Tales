@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -22,15 +23,33 @@ const Navbar = () => {
               {navMenuLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl"> TravelTales </a>
+          <Link href='/'>
+            <div className="flex items-center">
+              <Image src='/assets/logo.png' width={35} height={35} alt="Logo" className="" />
+              <p className=" text-xl font-bold text-left -500"> TravelTales </p>
+            </div>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {navMenuLinks}
           </ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end ">
+          <div className="space-x-2">
+            <Link
+              href="/login"
+              className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
+              Login
+            </Link>
+
+            <Link
+              href="/register"
+              className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
+              Register
+            </Link>
+
+          </div>
         </div>
       </div>
     </div>
