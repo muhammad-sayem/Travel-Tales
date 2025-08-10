@@ -1,7 +1,15 @@
+"use client";
+
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
+  const session = useSession();
+  console.log("Session", session);
+
+  const { data: sessionData, status } = session;
+
   const navMenuLinks = <>
     <li className=""><Link href='/'> Home </Link></li>
     <li className=""><Link href='/blogs'> All Blogs </Link></li>
@@ -37,17 +45,29 @@ const Navbar = () => {
         </div>
         <div className="navbar-end ">
           <div className="space-x-2">
-            <Link
-              href="/login"
-              className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
-              Login
-            </Link>
+            {
+              status === "authenticated"
+                ?
+                <div className="flex gap-x-2">
+                  <Image src={sessionData?.user?.image} width={30} height={30} alt="User Image" className="rounded-full h-10 w-10"/>
+                  <button onClick={() => signOut()} className="btn bg-[#59815B] text-[#ECEBE1]"> Logout </button>
+                </div>
+                :
+                <div className="space-x-2">
+                  <Link
+                    href="/login"
+                    className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
+                    Login
+                  </Link>
 
-            <Link
-              href="/register"
-              className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
-              Register
-            </Link>
+                  <Link
+                    href="/register"
+                    className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
+                    Register
+                  </Link>
+                </div>
+
+            }
 
           </div>
         </div>

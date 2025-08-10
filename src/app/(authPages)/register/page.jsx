@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
 import RegisterForm from "./components/RegisterForm";
+import GoogleSignIn from "@/components/GoogleSignIn";
 
 const RegisterPage = () => {
   return (
@@ -12,10 +12,7 @@ const RegisterPage = () => {
 
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-500 mb-2">Or sign in with</p>
-          <button className="w-full border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-            <FcGoogle size={25} />
-            <p className="font-bold"> Sign in with Google </p>
-          </button>
+          <GoogleSignIn />
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-600">
