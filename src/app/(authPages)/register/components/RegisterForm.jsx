@@ -12,17 +12,24 @@ const RegisterForm = () => {
     const form = e.target;
 
     const name = form.name.value;
-    const image =  form.image.value;
+    const image = form.image.value;
     const email = form.email.value;
     const password = form.password.value;
 
-    const userData = {name, image, email, password};
-    try{
+    const userData = {
+      name,
+      image,
+      email,
+      password,
+      role: "User"
+    };
+
+    try {
       await registerUser(userData);
       toast.success("New user added successfully!!")
       router.push('/');
     }
-    catch(error){
+    catch (error) {
       console.log(error);
     }
   }

@@ -1,17 +1,12 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const AddBlogForm = () => {
-  const session = useSession();
-  const { data: sessionData } = session;
-  console.log(sessionData);
-  const bloggerEmail = sessionData?.user?.email;
+const EditBlogForm = ({ singleBlogData }) => {
   const router = useRouter();
 
-  const handleAddBlog = async (e) => {
+  const handleEditBlog = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -22,43 +17,37 @@ const AddBlogForm = () => {
     const description = form.description.value;
     const cost = form.cost.value;
 
-    const blogData = {
-      title,
-      location,
-      travelImage,
-      travelDate,
-      description,
-      cost,
-      bloggerEmail,
-      status: "Pending",
-      likes: 0
-    };
+    const blogData = { title, location, travelImage, travelDate, description, cost };
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(blogData),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts/${singleBlogData._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(blogData)
+        }
+      );
       const data = await res.json();
-      toast.success("New Blog Added Successfully!");
-      router.push('/');
+      toast.success("Successfully Edited");
+      router.push("/user-dashboard/my-posts");
       console.log(data);
-    }
-    catch (error) {
-      console.log(error);
-      toast.error("Something went wrong")
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.log("Editing Error", error);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 w-4/5">
       <form
-        onSubmit={handleAddBlog}
-        className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg space-y-4"
+        onSubmit={handleEditBlog}
+        className="bg-white shadow-lg rounded-lg p-6 w-full space-y-4"
       >
         <h2 className="text-3xl font-bold text-[#59815B] mb-4 text-center">
-          Add Travel Blog
+          Edit Blog
         </h2>
 
         {/* Title */}
@@ -72,6 +61,7 @@ const AddBlogForm = () => {
             placeholder="Enter Blog Title"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
             required
+            defaultValue={singleBlogData?.title}
           />
         </div>
 
@@ -86,6 +76,7 @@ const AddBlogForm = () => {
             placeholder="Enter Location"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
             required
+            defaultValue={singleBlogData?.location}
           />
         </div>
 
@@ -100,6 +91,7 @@ const AddBlogForm = () => {
             placeholder="Enter Image URL"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
             required
+            defaultValue={singleBlogData?.travelImage}
           />
         </div>
 
@@ -113,6 +105,7 @@ const AddBlogForm = () => {
             type="date"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
             required
+            defaultValue={singleBlogData?.travelDate}
           />
         </div>
 
@@ -127,6 +120,7 @@ const AddBlogForm = () => {
             rows="4"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
             required
+            defaultValue={singleBlogData?.description}
           ></textarea>
         </div>
 
@@ -141,6 +135,7 @@ const AddBlogForm = () => {
             placeholder="Enter Travel Cost"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
             required
+            defaultValue={singleBlogData?.cost}
           />
         </div>
 
@@ -149,11 +144,11 @@ const AddBlogForm = () => {
           type="submit"
           className="w-full bg-[#59815B] hover:bg-[#3a573b] text-white font-semibold py-3 rounded-lg transition duration-200 hover:cursor-pointer"
         >
-          Submit Blog
+          Confirm
         </button>
       </form>
     </div>
   );
 };
 
-export default AddBlogForm;
+export default EditBlogForm;

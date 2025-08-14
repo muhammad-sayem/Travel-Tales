@@ -19,5 +19,4 @@ export const loginUser = async (userData) => {
   }
 
   return user;
-
 }

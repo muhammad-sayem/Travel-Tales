@@ -7,7 +7,7 @@ const SingleBlogPage = async ({ params }) => {
   const { title, travelImage, location, travelDate, description, cost } = singleBlog;
 
   return (
-    <div className="w-2/3 mx-auto p-6 bg-white shadow-md rounded-md mt-10">
+    <div className="w-2/3 mx-auto p-6 bg-white shadow-md rounded-md my-10">
       <h1 className="text-4xl font-bold text-[#59815B] mb-6">{title}</h1>
 
       <img

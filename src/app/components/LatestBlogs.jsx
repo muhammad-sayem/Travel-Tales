@@ -1,15 +1,13 @@
 import BlogCard from "../blogs/components/BlogCard";
 
-const getAllBlogs = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs`);
+const getlatestBlogs = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/latest`);
   const data = await res.json();
   return data;
 }
 const LatestBlogs = async () => {
-  const allBlogs = await getAllBlogs();
-  console.log("All Blogs", allBlogs);
-
-  const latestBlogs = allBlogs.slice(0, 3);
+  const latestBlogs = await getlatestBlogs();
+  console.log("All Blogs", latestBlogs);
 
   return (
     <div className="w-10/12 mx-auto py-16">

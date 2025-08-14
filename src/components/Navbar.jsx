@@ -7,14 +7,17 @@ import Link from "next/link";
 const Navbar = () => {
   const session = useSession();
   console.log("Session", session);
-
   const { data: sessionData, status } = session;
+
+  console.log('ROLE ----> ', sessionData?.user?.role);
+  const role = sessionData?.user?.role;
 
   const navMenuLinks = <>
     <li className=""><Link href='/'> Home </Link></li>
     <li className=""><Link href='/blogs'> All Blogs </Link></li>
     <li className=""><Link href='/add-blog'> Add Blog </Link></li>
     <li className=""><a> About Us </a></li>
+    <li className=""><Link href={`${role === "User" ? '/user-dashboard' : '/admin-dashboard'}`}> Dashboard </Link></li>
   </>
 
   return (

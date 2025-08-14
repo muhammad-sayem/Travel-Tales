@@ -46,23 +46,33 @@ export const authOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       console.log({ user, account, profile, email, credentials });
 
-      if (account) {
-        const { providerAccountId, provider } = account;
-        const { email: user_email, image, name } = user;
+      const usersCollection = dbConnect(collectionNames.usersCollction);
+      const query = { email: user?.email }
+      let isExist = await usersCollection.findOne(query);
 
-        const usersCollection = dbConnect(collectionNames.usersCollction);
-        const query = {providerAccountId: providerAccountId}
-        const isExist = await usersCollection.findOne(query);
-
-        if(!isExist) {
-          const userData = {providerAccountId, provider, email: user_email, image, name}
-          await usersCollection.insertOne(userData);
+      if (!isExist) {
+        const userData = {
+          provider: account?.provider,
+          email: user?.email,
+          image: user?.image,
+          name: user?.name,
+          role: "User"
         }
+        await usersCollection.insertOne(userData);
+        isExist = userData;
       }
-
-
-
+      user.role = isExist?.role
       return true
-    }
+    },
+
+    async session({ session }) {
+      console.log("FROM SESSION ----------->", session);
+      const usersCollction = dbConnect(collectionNames.usersCollction);
+
+      const dbUser = await usersCollction.findOne({ email: session?.user?.email });
+      session.user.role = dbUser?.role || "User";
+
+      return session
+    },
   }
 }
