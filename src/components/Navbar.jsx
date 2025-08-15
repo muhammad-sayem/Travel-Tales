@@ -16,8 +16,7 @@ const Navbar = () => {
     <li className=""><Link href='/'> Home </Link></li>
     <li className=""><Link href='/blogs'> All Blogs </Link></li>
     <li className=""><Link href='/add-blog'> Add Blog </Link></li>
-    <li className=""><a> About Us </a></li>
-    <li className=""><Link href={`${role === "User" ? '/user-dashboard' : '/admin-dashboard'}`}> Dashboard </Link></li>
+    <li className=""><Link href={`${role === "User" ? '/user-dashboard/my-profile' : '/admin-dashboard/my-profile'}`}> Dashboard </Link></li>
   </>
 
   return (
@@ -53,7 +52,7 @@ const Navbar = () => {
                 ?
                 <div className="flex gap-x-2">
                   <Image src={sessionData?.user?.image} width={30} height={30} alt="User Image" className="rounded-full h-10 w-10"/>
-                  <button onClick={() => signOut()} className="btn bg-[#59815B] text-[#ECEBE1]"> Logout </button>
+                  <button onClick={() => signOut({callbackUrl: "/login"})} className="btn bg-[#59815B] text-[#ECEBE1]"> Logout </button>
                 </div>
                 :
                 <div className="space-x-2">

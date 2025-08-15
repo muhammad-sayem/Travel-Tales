@@ -5,13 +5,12 @@ export const POST = async (req) => {
   const blogData = await req.json();
   const blogsCollection = dbConnect(collectionNames.blogsCollection);
   const result = await blogsCollection.insertOne(blogData);
-  
+
   return NextResponse.json(result);
 }
 
-export const GET = async(req) => {
+export const GET = async (req) => {
   const blogsCollection = dbConnect(collectionNames.blogsCollection);
-  const result = await blogsCollection.find().toArray();
-
+  const result = await blogsCollection.find({status: "Approved"}).sort({_id: -1}).toArray();
   return NextResponse.json(result);
 }

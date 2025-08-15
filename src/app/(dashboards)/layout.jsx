@@ -13,11 +13,11 @@ const DashboardLayout = async ({ children }) => {
 
   return (
     <div className="min-h-screen">
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 ">
         {/* Dashboard Sidebar */}
-        <div className="col-span-3 bg-[#59815B] text-[#ECEBE1] py-16 min-h-screen">
+        <div className="col-span-3 bg-[#59815B] text-[#ECEBE1] py-16 min-h-screen ">
           <div>
-            <ul>
+            <ul className="space-y-4">
               <li className="text-xl font-bold text-center">
                 <Link href={`${role === "User" ? '/user-dashboard/my-profile' : '/admin-dashboard/my-profile'}`}> My Profile </Link>
               </li>
@@ -26,14 +26,14 @@ const DashboardLayout = async ({ children }) => {
                   role === "User" ?
                     <Link href='/user-dashboard/my-posts'> My Posts </Link>
                     :
-                    <Link href='/admin-dashboard/manage-users'> Manage Users </Link>
+                    <Link href='/admin-dashboard/pending-posts'> Pending Posts </Link>
                 }
               </li>
             </ul>
             <div className="w-8/10 mx-auto border border-[#ECEBE1] my-6"></div>
 
             <div>
-              <ul>
+              <ul className="space-y-4">
                 <li className="text-xl font-bold text-center flex items-center justify-center gap-2">
                   <IoHome /> <Link href='/'>Home</Link>
                 </li>
@@ -42,9 +42,6 @@ const DashboardLayout = async ({ children }) => {
                 </li>
                 <li className="text-xl font-bold text-center flex items-center justify-center gap-2">
                   <IoAddCircleSharp /> <Link href='/add-blog'>Add Blog</Link>
-                </li>
-                <li className="text-xl font-bold text-center flex items-center justify-center gap-2">
-                  <span>ℹ️</span> <a>About Us</a>
                 </li>
               </ul>
 

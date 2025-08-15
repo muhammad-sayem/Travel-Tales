@@ -5,20 +5,25 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import Swal from "sweetalert2";
 
 const GoogleSignIn = () => {
   const router = useRouter();
-  const { status } = useSession(); 
+  const { status } = useSession();
   const [loading, setLoading] = useState(false);
 
   const handleGoogleSignIn = () => {
     setLoading(true);
-    signIn("google", { callbackUrl: "/" }); 
+    signIn("google", { callbackUrl: "/" });
   };
 
   useEffect(() => {
     if (status === "authenticated") {
-      toast.success("Successfully Logged in");
+      Swal.fire({
+        title: "Successfully Logged In!!",
+        icon: "success",
+        draggable: true
+      });
     }
   }, [status]);
 

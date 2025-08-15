@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AddBlogForm = () => {
   const session = useSession();
@@ -41,13 +42,21 @@ const AddBlogForm = () => {
         body: JSON.stringify(blogData),
       });
       const data = await res.json();
-      toast.success("New Blog Added Successfully!");
-      router.push('/');
+      Swal.fire({
+        title: "New Blog Added Successfully!!",
+        icon: "success",
+        draggable: true
+      });
+      router.push('/user-dashboard/my-posts');
       console.log(data);
     }
     catch (error) {
       console.log(error);
-      toast.error("Something went wrong")
+      Swal.fire({
+        title: "Something went wrong",
+        icon: "error",
+        draggable: true
+      });
     }
   };
 

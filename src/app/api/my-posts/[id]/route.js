@@ -2,11 +2,12 @@ import { authOptions } from "@/lib/authOptions";
 import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
-export const GET = async(req, {params}) => {
+export const GET = async (req, { params }) => {
   const p = await params;
-  const query = {_id: new ObjectId(p.id)};
+  const query = { _id: new ObjectId(p.id) };
   const blogsCollection = dbConnect(collectionNames.blogsCollection);
   const singleBlogData = await blogsCollection.findOne(query);
   console.log("Single Blog Data ---->", singleBlogData);
@@ -16,17 +17,17 @@ export const GET = async(req, {params}) => {
 
   const isBloggerOk = email === singleBlogData?.bloggerEmail;
 
-  if(isBloggerOk){
+  if (isBloggerOk) {
     return NextResponse.json(singleBlogData);
   }
-  else{
-    return NextResponse.json({success: false, message: "Forbidden Access!"});
+  else {
+    return NextResponse.json({ success: false, message: "Forbidden Access!" });
   }
 }
 
-export const PUT = async(req, {params}) => {
+export const PUT = async (req, { params }) => {
   const p = await params;
-  const query = {_id: new ObjectId(p.id)};
+  const query = { _id: new ObjectId(p.id) };
   const blogsCollection = dbConnect(collectionNames.blogsCollection);
 
   const singleBlogData = await blogsCollection.findOne(query);
@@ -36,16 +37,38 @@ export const PUT = async(req, {params}) => {
 
   const isBloggerOk = email === singleBlogData?.bloggerEmail;
 
-  if(isBloggerOk){
+  if (isBloggerOk) {
     const updateDoc = {
       $set: {
         ...updatedData
       }
     }
     const result = await blogsCollection.updateOne(query, updateDoc);
-    return NextResponse.json({success: true})
+    return NextResponse.json({ success: true })
   }
-  else{
-    NextResponse.json({success: false, message: "Forbidden Access!!"})
+  else {
+    NextResponse.json({ success: false, message: "Forbidden Access!!" })
+  }
+}
+
+export const DELETE = async (req, { params }) => {
+  const p = await params;
+  const query = { _id: new ObjectId(p.id) };
+  const blogsCollection = dbConnect(collectionNames.blogsCollection);
+  const singleBlogData = await blogsCollection.findOne(query);
+
+  const session = await getServerSession();
+  const email = session?.user?.email;
+
+  const isBloggerOk = email === singleBlogData?.bloggerEmail;
+
+  if (isBloggerOk) {
+    // Deleting blog from blogsCollection //
+    const result = await blogsCollection.deleteOne(query);
+    revalidatePath('/user-dashboard/my-posts');
+    return NextResponse.json(result);
+  }
+  else {
+    return NextResponse.json({ success: false })
   }
 }

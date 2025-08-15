@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const EditBlogForm = ({ singleBlogData }) => {
   const router = useRouter();
@@ -31,11 +32,20 @@ const EditBlogForm = ({ singleBlogData }) => {
         }
       );
       const data = await res.json();
-      toast.success("Successfully Edited");
+      Swal.fire({
+        title: "Edited Successfully!!",
+        icon: "success",
+        draggable: true
+      });
       router.push("/user-dashboard/my-posts");
       console.log(data);
-    } catch (error) {
-      toast.error("Something went wrong");
+    }
+    catch (error) {
+      Swal.fire({
+        title: "Something went wrong",
+        icon: "error",
+        draggable: true
+      });
       console.log("Editing Error", error);
     }
   };

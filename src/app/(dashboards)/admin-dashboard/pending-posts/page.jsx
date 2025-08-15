@@ -1,28 +1,16 @@
-import DeleteButton from "@/components/buttons/DeleteButton";
-import EditButton from "@/components/buttons/EditButton";
-import { headers } from "next/headers";
+import AcceptButton from "../components/AcceptButton";
+import RejectButton from "../components/RejectButton";
 
-const getMyPosts = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts`, {
-    cache: 'no-store',
-    headers: {
-      Cookie: headers().get("cookie") || "",
-    }
-  }
-  );
-  const data = await res.json();
-  return data;
-}
-
-const MyPosts = async () => {
-  const myPosts = await getMyPosts();
-  console.log("My Posts", myPosts);
+const PendingPosts = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/pending-posts`);
+  const pendingPosts = await res.json();
+  console.log("Pending Posts ---------> ", pendingPosts);
   return (
     <div>
-      <h3 className="text-4xl text-center text-[#59815B] font-black my-8"> My Posts </h3>
+      <h3 className="text-4xl text-center text-[#59815B] font-black my-8"> Pending Posts </h3>
 
       {
-        myPosts.length > 0 ?
+        pendingPosts.length > 0 ?
           <div className="overflow-x-auto">
             <table className="table">
               {/* head */}
@@ -38,7 +26,7 @@ const MyPosts = async () => {
               <tbody>
                 {/* row 1 */}
                 {
-                  myPosts?.map(post => {
+                  pendingPosts?.map(post => {
                     return (
                       <tr key={post._id}>
                         <td>
@@ -64,10 +52,10 @@ const MyPosts = async () => {
                           {post.travelDate}
                         </td>
                         <th className="flex gap-x-2">
-                          <EditButton
+                          <AcceptButton
                             postId={post._id}
                           />
-                          <DeleteButton
+                          <RejectButton
                             postId={post._id}
                           />
                         </th>
@@ -79,14 +67,14 @@ const MyPosts = async () => {
               </tbody>
             </table>
           </div> :
-
-          <p className="flex items-center justify-center min-h-[50vh] text-2xl font-semibold text-[#59815B]">
+          <p className="flex items-center justify-center min-h-[50vh] text-xl font-semibold text-gray-500">
             No posts found
           </p>
+
 
       }
     </div>
   );
 };
 
-export default MyPosts;
+export default PendingPosts;

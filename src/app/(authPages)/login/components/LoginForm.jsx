@@ -2,6 +2,7 @@
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -13,18 +14,26 @@ const LoginForm = () => {
     const email = form.email.value;
     const password = form.password.value;
     const userData = { email, password }
-    
+
     try {
       const response = await signIn('credentials', { email, password, callbackUrl: '/', redirect: false });
 
       if (response.ok) {
-        toast.success("User logged in successfully!!")
+        Swal.fire({
+          title: "New User Added Successfully!!",
+          icon: "success",
+          draggable: true
+        });
         router.push('/');
         form.reset();
       }
 
-      else{
-        toast.error("Login Failed! Try Again")
+      else {
+        Swal.fire({
+          title: "Login Failed! Try Again",
+          icon: "error",
+          draggable: true
+        });
       }
     }
 

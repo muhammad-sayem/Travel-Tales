@@ -10,7 +10,7 @@ export const GET = async (req) => {
     console.log("Logged in user", loggedInUserEmail);
     const blogsCollection = dbConnect(collectionNames.blogsCollection);
 
-    const query = { bloggerEmail: loggedInUserEmail };
+    const query = { bloggerEmail: loggedInUserEmail, status: "Approved" };
     const result = await blogsCollection.find(query).toArray();
 
     return NextResponse.json(result);

@@ -3,6 +3,7 @@
 import { registerUser } from "@/app/actions/auth/registerUser";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -26,7 +27,11 @@ const RegisterForm = () => {
 
     try {
       await registerUser(userData);
-      toast.success("New user added successfully!!")
+      Swal.fire({
+        title: "New User Added Successfully!!",
+        icon: "success",
+        draggable: true
+      });
       router.push('/');
     }
     catch (error) {
