@@ -10,7 +10,7 @@ const Loader = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <l-helix size="45" speed="2.5" color="black"></l-helix>
+      <l-helix size="45" speed="2.5" color="#59815B"></l-helix>
     </div>
   );
 };

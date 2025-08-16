@@ -25,134 +25,114 @@ const EditBlogForm = ({ singleBlogData }) => {
         `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts/${singleBlogData._id}`,
         {
           method: "PUT",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(blogData)
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(blogData),
         }
       );
       const data = await res.json();
       Swal.fire({
         title: "Edited Successfully!!",
         icon: "success",
-        draggable: true
+        draggable: true,
       });
       router.push("/user-dashboard/my-posts");
       console.log(data);
-    }
-    catch (error) {
+    } catch (error) {
       Swal.fire({
         title: "Something went wrong",
         icon: "error",
-        draggable: true
+        draggable: true,
       });
       console.log("Editing Error", error);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 w-4/5">
+    <div className="flex justify-center items-center min-h-screen px-4 sm:px-6 md:px-8">
       <form
         onSubmit={handleEditBlog}
-        className="bg-white shadow-lg rounded-lg p-6 w-full space-y-4"
+        className="bg-white shadow-lg rounded-lg p-6 sm:p-8 md:p-10 w-full max-w-3xl space-y-4"
       >
-        <h2 className="text-3xl font-bold text-[#59815B] mb-4 text-center">
+        <h2 className="text-2xl sm:text-3xl md:text-3xl font-bold text-[#59815B] mb-4 text-center">
           Edit Blog
         </h2>
 
-        {/* Title */}
-        <div>
-          <label className="block mb-1 font-semibold text-[#59815B]">
-            Blog Title
-          </label>
-          <input
-            name="title"
-            type="text"
-            placeholder="Enter Blog Title"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
-            required
-            defaultValue={singleBlogData?.title}
-          />
+        <div className="space-y-4">
+          <div>
+            <label className="block mb-1 font-semibold text-[#59815B]">Blog Title</label>
+            <input
+              name="title"
+              type="text"
+              placeholder="Enter Blog Title"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
+              required
+              defaultValue={singleBlogData?.title}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-semibold text-[#59815B]">Location</label>
+            <input
+              name="location"
+              type="text"
+              placeholder="Enter Location"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
+              required
+              defaultValue={singleBlogData?.location}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-semibold text-[#59815B]">Image Link</label>
+            <input
+              name="image"
+              type="text"
+              placeholder="Enter Image URL"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
+              required
+              defaultValue={singleBlogData?.travelImage}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-semibold text-[#59815B]">Travel Date</label>
+            <input
+              name="date"
+              type="date"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
+              required
+              defaultValue={singleBlogData?.travelDate}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-semibold text-[#59815B]">Experience Description</label>
+            <textarea
+              name="description"
+              placeholder="Write your travel experience..."
+              rows="4"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
+              required
+              defaultValue={singleBlogData?.description}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block mb-1 font-semibold text-[#59815B]">Travel Cost</label>
+            <input
+              name="cost"
+              type="number"
+              placeholder="Enter Travel Cost"
+              className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
+              required
+              defaultValue={singleBlogData?.cost}
+            />
+          </div>
         </div>
 
-        {/* Location */}
-        <div>
-          <label className="block mb-1 font-semibold text-[#59815B]">
-            Location
-          </label>
-          <input
-            name="location"
-            type="text"
-            placeholder="Enter Location"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
-            required
-            defaultValue={singleBlogData?.location}
-          />
-        </div>
-
-        {/* Image */}
-        <div>
-          <label className="block mb-1 font-semibold text-[#59815B]">
-            Image Link
-          </label>
-          <input
-            name="image"
-            type="text"
-            placeholder="Enter Image URL"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
-            required
-            defaultValue={singleBlogData?.travelImage}
-          />
-        </div>
-
-        {/* Date */}
-        <div>
-          <label className="block mb-1 font-semibold text-[#59815B]">
-            Travel Date
-          </label>
-          <input
-            name="date"
-            type="date"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
-            required
-            defaultValue={singleBlogData?.travelDate}
-          />
-        </div>
-
-        {/* Description */}
-        <div>
-          <label className="block mb-1 font-semibold text-[#59815B]">
-            Experience Description
-          </label>
-          <textarea
-            name="description"
-            placeholder="Write your travel experience..."
-            rows="4"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
-            required
-            defaultValue={singleBlogData?.description}
-          ></textarea>
-        </div>
-
-        {/* Cost */}
-        <div>
-          <label className="block mb-1 font-semibold text-[#59815B]">
-            Travel Cost
-          </label>
-          <input
-            name="cost"
-            type="number"
-            placeholder="Enter Travel Cost"
-            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#59815B]"
-            required
-            defaultValue={singleBlogData?.cost}
-          />
-        </div>
-
-        {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-[#59815B] hover:bg-[#3a573b] text-white font-semibold py-3 rounded-lg transition duration-200 hover:cursor-pointer"
+          className="w-full bg-[#59815B] hover:bg-[#3a573b] text-white font-semibold py-3 rounded-lg transition duration-200"
         >
           Confirm
         </button>

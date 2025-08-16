@@ -7,7 +7,7 @@ const Toolkits = () => {
       <div className="w-10/12 mx-auto">
         <h3 className="text-4xl text-center text-[#59815B] font-black mb-8"> Traveler's Toolkit </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
 
           <div>
             <Image src='/assets/kit 1.png' width={180} height={180} alt="Kit Image" className="w-full h-48 duration-500 hover:scale-105" />

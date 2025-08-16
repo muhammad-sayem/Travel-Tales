@@ -1,6 +1,11 @@
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 
+export const metadata = {
+  title: "User Dashboard",
+  description: "User Dashboard",
+};
+
 const UserMyProfile = async () => {
   const session = await getServerSession(authOptions);
 

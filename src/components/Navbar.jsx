@@ -3,79 +3,101 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const session = useSession();
-  console.log("Session", session);
-  const { data: sessionData, status } = session;
-
-  console.log('ROLE ----> ', sessionData?.user?.role);
+  const { data: sessionData, status } = useSession();
   const role = sessionData?.user?.role;
+  const pathName = usePathname();
 
-  const navMenuLinks = <>
-    <li className=""><Link href='/'> Home </Link></li>
-    <li className=""><Link href='/blogs'> All Blogs </Link></li>
-    <li className=""><Link href='/add-blog'> Add Blog </Link></li>
-    <li className=""><Link href={`${role === "User" ? '/user-dashboard/my-profile' : '/admin-dashboard/my-profile'}`}> Dashboard </Link></li>
-  </>
+  const navMenuLinks = (
+    <>
+      <li><Link href="/">Home</Link></li>
+      <li><Link href="/blogs">All Blogs</Link></li>
+      <li><Link href="/add-blog">Add Blog</Link></li>
+      <li>
+        <Link href={role === "User" ? "/user-dashboard/my-profile" : "/admin-dashboard/my-profile"}>
+          Dashboard
+        </Link>
+      </li>
+    </>
+  );
 
-  return (
-    <div className="">
-      <div className="navbar bg-transparent w-11/12 mx-auto">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+  if (!pathName.includes("dashboard")) {
+    return (
+      <div className="fixed top-0 left-0 w-full z-50 bg-black/50">
+        <div className="navbar w-full md:w-11/12 mx-auto px-4 md:px-6 max-w-[100%]">
+          <div className="navbar-start">
+            <div className="dropdown">
+              <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
+              >
+                {navMenuLinks}
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow ">
+
+            <Link href="/">
+              <div className="flex items-center">
+                <Image src="/assets/logo white.png" width={35} height={35} alt="Logo" className="block" />
+                <p className="ml-2 text-lg md:text-xl font-bold text-[#ECEBE1]">TravelTales</p>
+              </div>
+            </Link>
+          </div>
+
+          <div className="navbar-center hidden md:flex">
+            <ul className="menu menu-horizontal px-1 text-[#ECEBE1] gap-x-4">
               {navMenuLinks}
             </ul>
           </div>
-          <Link href='/'>
-            <div className="flex items-center">
-              <Image src='/assets/logo.png' width={35} height={35} alt="Logo" className="" />
-              <p className=" text-xl font-bold text-left -500"> TravelTales </p>
-            </div>
-          </Link>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navMenuLinks}
-          </ul>
-        </div>
-        <div className="navbar-end ">
-          <div className="space-x-2">
-            {
-              status === "authenticated"
-                ?
-                <div className="flex gap-x-2">
-                  <Image src={sessionData?.user?.image} width={30} height={30} alt="User Image" className="rounded-full h-10 w-10"/>
-                  <button onClick={() => signOut({callbackUrl: "/login"})} className="btn bg-[#59815B] text-[#ECEBE1]"> Logout </button>
-                </div>
-                :
-                <div className="space-x-2">
-                  <Link
-                    href="/login"
-                    className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
-                    Login
-                  </Link>
 
-                  <Link
-                    href="/register"
-                    className="btn bg-[#59815B] text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]">
-                    Register
-                  </Link>
-                </div>
-
-            }
-
+          <div className="navbar-end">
+            {status === "authenticated" ? (
+              <div className="flex gap-x-2 md:gap-x-3 items-center">
+                <Image
+                  src={sessionData?.user?.image}
+                  width={36}
+                  height={36}
+                  alt="User Image"
+                  className="rounded-full h-9 w-9 md:h-10 md:w-10 border-2 border-[#EDEAE1]"
+                />
+                <button
+                  onClick={() => signOut({ callbackUrl: "/login" })}
+                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-x-2">
+                <Link
+                  href="/login"
+                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 export default Navbar;

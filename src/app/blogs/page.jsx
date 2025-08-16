@@ -6,12 +6,17 @@ const getAllBlogs = async () => {
   return data;
 }
 
+export const metadata = {
+  title: "Blogs",
+  description: "Showing all approved blogs",
+};
+
 const Blogs = async () => {
   const allBlogs = await getAllBlogs();
   // console.log("All Blogs", allBlogs);
 
   return (
-    <div className="w-10/12 mx-auto my-16">
+    <div className="w-10/12 mx-auto py-32">
       {
         allBlogs.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
