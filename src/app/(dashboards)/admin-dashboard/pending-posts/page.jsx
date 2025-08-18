@@ -44,7 +44,7 @@ const PendingPosts = async () => {
                   <td className="px-2 py-2">{post.title}</td>
                   <td className="px-2 py-2">{post.location}</td>
                   <td className="px-2 py-2">{post.travelDate}</td>
-                  <td className="px-2 py-2 flex gap-2 flex-wrap">
+                  <td className="px-2 py-2 flex gap-2 flex-wrap md:flex-nowrap">
                     <AcceptButton postId={post._id} />
                     <RejectButton postId={post._id} />
                   </td>

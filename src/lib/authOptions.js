@@ -1,37 +1,22 @@
 import { loginUser } from "@/app/actions/auth/loginUser";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import dbConnect, { collectionNames } from "./dbConnect";
+import dbConnect, { collectionNames } from "@/lib/dbConnect";
+
+const adminEmails = process.env.ADMIN_EMAIL?.split(",") || [];
 
 export const authOptions = {
-  // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Email", type: "text", placeholder: "Enter Email" },
+        email: { label: "Email", type: "text", placeholder: "Enter Email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
-        console.log("CREDENTIALS ----------> ", credentials);
-        // Add logic here to look up the user from the credentials supplied
+      async authorize(credentials) {
         const user = await loginUser(credentials);
-        console.log("Logged in -----------> ", user);
-
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-        }
+        if (user) return user;
+        return null;
       }
     }),
     GoogleProvider({
@@ -39,40 +24,54 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     })
   ],
+
   pages: {
-    signIn: '/login'
+    signIn: "/login"
   },
+
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log({ user, account, profile, email, credentials });
+    // SignIn callback → check admin emails & save role
+    async signIn({ user, account }) {
+      const usersCollection = dbConnect(collectionNames.usersCollection);
+      const query = { email: user?.email };
+      let dbUser = await usersCollection.findOne(query);
 
-      const usersCollection = dbConnect(collectionNames.usersCollction);
-      const query = { email: user?.email }
-      let isExist = await usersCollection.findOne(query);
+      // Determine role
+      const role = adminEmails.includes(user.email) ? "Admin" : "User";
 
-      if (!isExist) {
+      if (!dbUser) {
+        // First-time user → insert
         const userData = {
-          provider: account?.provider,
-          email: user?.email,
-          image: user?.image,
-          name: user?.name,
-          role: "User"
-        }
+          provider: account?.provider || "credentials",
+          email: user.email,
+          name: user.name || "",
+          image: user.image || "",
+          role
+        };
         await usersCollection.insertOne(userData);
-        isExist = userData;
+        dbUser = userData;
+      } else if (dbUser.role !== role) {
+        // Update role if changed (e.g. admin added later)
+        await usersCollection.updateOne({ email: user.email }, { $set: { role } });
+        dbUser.role = role;
       }
-      user.role = isExist?.role
-      return true
+
+      // Save role in user object (JWT)
+      user.role = dbUser.role;
+
+      return true;
     },
 
-    async session({ session }) {
-      console.log("FROM SESSION ----------->", session);
-      const usersCollction = dbConnect(collectionNames.usersCollction);
-
-      const dbUser = await usersCollction.findOne({ email: session?.user?.email });
-      session.user.role = dbUser?.role || "User";
-
-      return session
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role || "User";
+      }
+      return token;
     },
+
+    async session({ session, token }) {
+      session.user.role = token.role || "User";
+      return session;
+    }
   }
-}
+};

@@ -23,7 +23,7 @@ const TravelTips = () => {
             width={500} 
             height={400} 
             alt="Tips image 1" 
-            className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
+            className="w-full max-w-lg h-auto object-cover rounded-lg shadow-lg"
           />
         </div>
       </div>
@@ -35,7 +35,7 @@ const TravelTips = () => {
             width={500} 
             height={400} 
             alt="Tips image 2" 
-            className="w-full max-w-md h-auto object-cover rounded-lg shadow-lg"
+            className="w-full max-w-lg h-auto object-cover rounded-lg shadow-lg"
           />
         </div>
 

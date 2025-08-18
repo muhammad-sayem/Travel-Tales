@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaFacebookSquare, FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 
@@ -21,10 +22,14 @@ const Footer = () => {
           <h3 className="text-3xl font-bold mb-4 text-center md:text-right">Stay Connected</h3>
           <div className="w-[230px] border-t-2 border-white mb-4"></div>
           <div className="flex gap-4 justify-center md:justify-end flex-wrap">
-            <FaFacebookSquare size={40} />
-            <FaLinkedin size={40} />
-            <FaGithubSquare size={40} />
-            <FaSquareInstagram size={40} />
+
+            <Link href='https://www.facebook.com/shahrulislam.sayem/' target="_blank"> <FaFacebookSquare size={40} /> </Link>
+
+            <Link href="https://github.com/muhammad-sayem/" target="_blank"> <FaLinkedin size={40}/> </Link>
+
+            <Link href="https://www.linkedin.com/in/md-shahrul-islam-sayem/" target="_blank"> <FaGithubSquare size={40} /> </Link>
+
+            <Link href="https://www.instagram.com/_muhammad_sayem/" target="_blank"> <FaSquareInstagram size={40} /> </Link>
           </div>
         </div>
 

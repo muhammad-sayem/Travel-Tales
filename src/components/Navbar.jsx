@@ -27,6 +27,7 @@ const Navbar = () => {
     return (
       <div className="fixed top-0 left-0 w-full z-50 bg-black/50">
         <div className="navbar w-full md:w-11/12 mx-auto px-4 md:px-6 max-w-[100%]">
+          {/* Navbar Start */}
           <div className="navbar-start">
             <div className="dropdown">
               <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,22 +53,29 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Navbar Center */}
           <div className="navbar-center hidden md:flex">
             <ul className="menu menu-horizontal px-1 text-[#ECEBE1] gap-x-4">
               {navMenuLinks}
             </ul>
           </div>
 
+          {/* Navbar End */}
           <div className="navbar-end">
             {status === "authenticated" ? (
               <div className="flex gap-x-2 md:gap-x-3 items-center">
-                <Image
-                  src={sessionData?.user?.image}
-                  width={36}
-                  height={36}
-                  alt="User Image"
-                  className="rounded-full h-9 w-9 md:h-10 md:w-10 border-2 border-[#EDEAE1]"
-                />
+                {/* Safe User Image */}
+                {sessionData?.user?.image && sessionData.user.image !== "nai" ? (
+                  <Image
+                    src={sessionData.user.image}
+                    width={36}
+                    height={36}
+                    alt="User Image"
+                    className="rounded-full h-9 w-9 md:h-10 md:w-10 border-2 border-[#EDEAE1]"
+                  />
+                ) : (
+                  <div className="rounded-full h-9 w-9 md:h-10 md:w-10 border-2 border-[#EDEAE1] bg-gray-300" />
+                )}
                 <button
                   onClick={() => signOut({ callbackUrl: "/login" })}
                   className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5"

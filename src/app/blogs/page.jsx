@@ -16,7 +16,11 @@ const Blogs = async () => {
   // console.log("All Blogs", allBlogs);
 
   return (
-    <div className="w-10/12 mx-auto py-32">
+
+    <div className="w-10/12 mx-auto py-24">
+      <h3 className="text-3xl sm:text-4xl md:text-4xl text-center text-[#59815B] font-black mb-8 pt-8">
+        All Blogs
+      </h3>
       {
         allBlogs.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
