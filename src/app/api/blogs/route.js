@@ -11,6 +11,6 @@ export const POST = async (req) => {
 
 export const GET = async (req) => {
   const blogsCollection = dbConnect(collectionNames.blogsCollection);
-  const result = await blogsCollection.find({status: "Approved"}).toArray();
+  const result = await blogsCollection.find({ status: "Approved" }).toArray();
   return NextResponse.json(result);
 }

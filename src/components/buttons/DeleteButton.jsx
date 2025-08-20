@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
-
 const DeleteButton = ({ postId }) => {
   const router = useRouter();
 

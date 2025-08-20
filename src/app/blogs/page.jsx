@@ -1,9 +1,15 @@
 import BlogCard from "./components/BlogCard";
 
 const getAllBlogs = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs`);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs`);
+    const data = await res.json();
+    return data;
+  } 
+  catch (error) {
+    console.log(error);
+    throw new Error("")
+  }
 }
 
 export const metadata = {
@@ -14,6 +20,8 @@ export const metadata = {
 const Blogs = async () => {
   const allBlogs = await getAllBlogs();
   // console.log("All Blogs", allBlogs);
+
+  // const allBlogs = [];
 
   return (
 
