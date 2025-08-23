@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import DeleteButton from "@/components/buttons/DeleteButton";
 import EditButton from "@/components/buttons/EditButton";
 import { headers } from "next/headers";
@@ -8,7 +10,7 @@ export const metadata = {
 };
 
 const getMyPosts = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/my-posts`, {
     cache: "no-store",
     headers: {
       Cookie: headers().get("cookie") || "",

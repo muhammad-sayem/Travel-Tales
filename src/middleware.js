@@ -1,29 +1,40 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
-export const middleware = async (req) => {
-  const token = await getToken({ req });
+export async function middleware(req) {
   const url = req.nextUrl.clone();
 
-  if (!token) {
-    url.pathname = '/login';
-    return NextResponse.redirect(url);
-  }
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+    secureCookie: process.env.NODE_ENV === "production",
+  });
 
   if (
-    (url.pathname.startsWith('/admin-dashboard') && token.role !== 'Admin')
+    !token &&
+    (url.pathname.startsWith("/admin-dashboard") ||
+      url.pathname.startsWith("/user-dashboard") ||
+      url.pathname.startsWith("/add-blog"))
   ) {
-    url.pathname = '/';
+    url.pathname = "/login";
     return NextResponse.redirect(url);
   }
-  
+
+  if (token) {
+    if (url.pathname.startsWith("/admin-dashboard") && token?.role !== "Admin") {
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+
+    if (url.pathname.startsWith("/user-dashboard") && token?.role !== "User") {
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+  }
+
   return NextResponse.next();
-};
+}
 
 export const config = {
-  matcher: [
-    '/add-blog',
-    '/admin-dashboard/:path*',
-    '/user-dashboard/:path*'
-  ],
+  matcher: ["/add-blog", "/admin-dashboard/:path*", "/user-dashboard/:path*"],
 };

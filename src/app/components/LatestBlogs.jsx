@@ -1,8 +1,14 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import BlogCard from "../blogs/components/BlogCard";
+import { headers } from "next/headers";
 
 const getlatestBlogs = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/latest`);
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs/latest`, {
+    cache: "no-store",
+    
+  });
   const data = await res.json();
   return data;
 }
@@ -21,8 +27,8 @@ const LatestBlogs = async () => {
           </h3>
         </div>
         <div className="flex justify-center md:justify-end">
-          <Link 
-            href='/blogs' 
+          <Link
+            href='/blogs'
             className="btn text-white text-base sm:text-lg font-normal bg-[#59815B] px-6 py-3 sm:px-8 sm:py-4 transition-transform duration-500 hover:scale-105"
           >
             View All Blogs

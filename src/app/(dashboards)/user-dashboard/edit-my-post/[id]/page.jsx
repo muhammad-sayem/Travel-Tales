@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import EditBlogForm from "@/app/(dashboards)/user-dashboard/edit-my-post/components/EditBlogForm";
 import { headers } from "next/headers";
 
@@ -8,7 +10,7 @@ export const metadata = {
 
 const EditMyPost = async ({ params }) => {
   const p = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts/${p.id}`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/my-posts/${p.id}`, {
     cache: "no-store",
     headers: {
       Cookie: headers().get("cookie") || "",

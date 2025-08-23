@@ -18,7 +18,7 @@ const RejectButton = ({ postId }) => {
     })
       .then(async (result) => {
         if (result.isConfirmed) {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/pending-posts/${id}`, {
+          const res = await fetch(`${process.env.NEXTAUTH_URL}/api/pending-posts/${id}`, {
             method: "DELETE"
           });
           const data = await res.json();

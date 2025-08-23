@@ -1,7 +1,14 @@
+import { headers } from "next/headers";
+
+export const dynamic = "force-dynamic";
+
 const SingleBlogPage = async ({ params }) => {
   const { id } = params;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/${id}`);
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs/${id}`, {
+    cache: "no-store",
+    
+  });
   const singleBlog = await res.json();
 
   const { title, travelImage, location, travelDate, description, cost } = singleBlog;

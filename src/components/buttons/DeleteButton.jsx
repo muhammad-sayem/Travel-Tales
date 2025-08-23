@@ -17,7 +17,7 @@ const DeleteButton = ({ postId }) => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts/${postId}`, {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/my-posts/${postId}`, {
           method: "DELETE",
         });
         const data = await res.json();

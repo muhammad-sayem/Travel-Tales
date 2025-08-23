@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+
+import { headers } from "next/headers";
 import AcceptButton from "../components/AcceptButton";
 import RejectButton from "../components/RejectButton";
 
@@ -7,7 +10,10 @@ export const metadata = {
 };
 
 const PendingPosts = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/pending-posts`);
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs/pending-posts`, {
+    cache: "no-store",
+    
+  });
   const pendingPosts = await res.json();
   console.log("Pending Posts ---------> ", pendingPosts);
 
