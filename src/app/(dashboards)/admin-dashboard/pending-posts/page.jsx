@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 const PendingPosts = async () => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs/pending-posts`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/pending-posts`, {
     cache: "no-store",
     
   });

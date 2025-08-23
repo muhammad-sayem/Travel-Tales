@@ -6,7 +6,7 @@ import SortBlogs from "./components/SortBlogs";
 
 const getAllBlogs = async () => {
   try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs`, {
       cache: "no-store",
 
     });

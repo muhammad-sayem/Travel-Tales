@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 const getMyPosts = async () => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/my-posts`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts`, {
     cache: "no-store",
     headers: {
       Cookie: headers().get("cookie") || "",

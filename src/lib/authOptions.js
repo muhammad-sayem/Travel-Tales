@@ -51,7 +51,7 @@ export const authOptions = {
         await usersCollection.insertOne(userData);
         dbUser = userData;
       } else if (dbUser.role !== role) {
-        // Update role if changed (e.g. admin added later)
+        // Update role if changed 
         await usersCollection.updateOne({ email: user.email }, { $set: { role } });
         dbUser.role = role;
       }

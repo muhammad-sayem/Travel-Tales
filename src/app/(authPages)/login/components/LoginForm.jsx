@@ -1,52 +1,65 @@
 "use client";
-import { signIn } from "next-auth/react"
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
-
     const email = form.email.value;
     const password = form.password.value;
-    const userData = { email, password }
 
     try {
-      const response = await signIn('credentials', { email, password, callbackUrl: '/', redirect: false });
+      const response = await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/",
+        redirect: false,
+      });
 
       if (response.ok) {
         Swal.fire({
           title: "New User Added Successfully!!",
           icon: "success",
-          draggable: true
+          draggable: true,
         });
-        router.push('/');
+        router.push("/");
         form.reset();
-      }
-
-      else {
+      } else {
         Swal.fire({
           title: "Login Failed! Try Again",
           icon: "error",
-          draggable: true
+          draggable: true,
         });
       }
-    }
-
-    catch (error) {
+    } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-40">
+        <div className="w-8 h-8 border-4 border-gray-300 border-t-[#59815B] rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
     <div>
       <form onSubmit={handleLogin} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Email
+          </label>
           <input
             name="email"
             type="email"
@@ -56,7 +69,9 @@ const LoginForm = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Password
+          </label>
           <input
             name="password"
             type="password"

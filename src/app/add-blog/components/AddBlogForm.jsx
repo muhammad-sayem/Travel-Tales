@@ -36,7 +36,7 @@ const AddBlogForm = () => {
     };
 
     try {
-      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs`, {
+      const res = await fetch(`/api/blogs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(blogData),

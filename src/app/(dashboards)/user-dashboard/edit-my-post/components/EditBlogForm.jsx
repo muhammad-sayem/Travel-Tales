@@ -22,7 +22,7 @@ const EditBlogForm = ({ singleBlogData }) => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXTAUTH_URL}/api/my-posts/${singleBlogData._id}`,
+        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/my-posts/${singleBlogData._id}`,
         {
           method: "PUT",
           headers: { "content-type": "application/json" },

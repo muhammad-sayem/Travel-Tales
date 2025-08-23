@@ -5,7 +5,7 @@ import BlogCard from "../blogs/components/BlogCard";
 import { headers } from "next/headers";
 
 const getlatestBlogs = async () => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs/latest`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/blogs/latest`, {
     cache: "no-store",
     
   });

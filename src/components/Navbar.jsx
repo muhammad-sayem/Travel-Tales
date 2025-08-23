@@ -3,20 +3,59 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { data: sessionData, status } = useSession();
   const role = sessionData?.user?.role;
   const pathName = usePathname();
+  const router = useRouter();
+
+  const handleAddBlogClick = () => {
+    if (status === "authenticated") router.push("/add-blog");
+    else if (status === "loading") return;
+    else router.push("/login");
+  };
 
   const navMenuLinks = (
     <>
-      <li><Link href="/">Home</Link></li>
-      <li><Link href="/blogs">All Blogs</Link></li>
-      <li><Link href="/add-blog">Add Blog</Link></li>
       <li>
-        <Link href={role === "User" ? "/user-dashboard/my-profile" : "/admin-dashboard/my-profile"}>
+        <Link
+          href="/"
+          className="text-[#ECEBE1] hover:text-[#59815B]"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/blogs"
+          className="text-[#ECEBE1] hover:text-[#59815B]"
+        >
+          All Blogs
+        </Link>
+      </li>
+      <li>
+        <button
+          onClick={handleAddBlogClick}
+          className={`${
+            status === "loading"
+              ? "text-gray-400 cursor-not-allowed"
+              : "text-[#ECEBE1] hover:text-[#59815B]"
+          }`}
+        >
+          Add Blog
+        </button>
+      </li>
+      <li>
+        <Link
+          href={
+            role === "User"
+              ? "/user-dashboard/my-profile"
+              : "/admin-dashboard/my-profile"
+          }
+          className="text-[#ECEBE1] hover:text-[#59815B]"
+        >
           Dashboard
         </Link>
       </li>
@@ -55,7 +94,7 @@ const Navbar = () => {
 
           {/* Navbar Center */}
           <div className="navbar-center hidden md:flex">
-            <ul className="menu menu-horizontal px-1 text-[#ECEBE1] gap-x-4">
+            <ul className="menu menu-horizontal px-1 gap-x-4">
               {navMenuLinks}
             </ul>
           </div>
@@ -64,7 +103,6 @@ const Navbar = () => {
           <div className="navbar-end">
             {status === "authenticated" ? (
               <div className="flex gap-x-2 md:gap-x-3 items-center">
-                {/* Safe User Image */}
                 {sessionData?.user?.image && sessionData.user.image !== "nai" ? (
                   <Image
                     src={sessionData.user.image}
@@ -78,7 +116,7 @@ const Navbar = () => {
                 )}
                 <button
                   onClick={() => signOut({ callbackUrl: "/login" })}
-                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5"
+                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b]"
                 >
                   Logout
                 </button>
@@ -87,13 +125,13 @@ const Navbar = () => {
               <div className="flex gap-x-2">
                 <Link
                   href="/login"
-                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]"
+                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b]"
                 >
                   Login
                 </Link>
                 <Link
                   href="/register"
-                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:text-[#59815B] hover:bg-[#ECEBE1] hover:border-2 border-[#59815B]"
+                  className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b]"
                 >
                   Register
                 </Link>
