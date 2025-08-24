@@ -2,7 +2,6 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const AddBlogForm = () => {
@@ -61,7 +60,7 @@ const AddBlogForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4" data-aos="zoom-in" data-aos-duration="1500">
       <form
         onSubmit={handleAddBlog}
         className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg space-y-4"

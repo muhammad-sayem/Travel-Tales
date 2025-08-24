@@ -9,27 +9,27 @@ const Toolkits = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
 
-          <div>
+          <div data-aos="flip-up" data-aos-duration="1500">
             <Image src='/assets/kit 1.png' width={180} height={180} alt="Kit Image" className="w-full h-48 duration-500 hover:scale-105" />
             <p className="text-2xl font-bold text-center"> Shoes </p>
           </div>
 
-          <div>
+          <div data-aos="flip-up" data-aos-duration="1500">
             <Image src='/assets/kit 2.png' width={180} height={180} alt="Kit Image" className="w-full h-48 duration-500 hover:scale-105" />
             <p className="text-2xl font-bold text-center"> Rain Coat </p>
           </div>
 
-          <div>
+          <div data-aos="flip-up" data-aos-duration="1500">
             <Image src='/assets/kit 4.png' width={180} height={180} alt="Kit Image" className="w-full h-48 duration-500 hover:scale-105" />
             <p className="text-2xl font-bold text-center"> Camera </p>
           </div>
 
-          <div>
+          <div data-aos="flip-up" data-aos-duration="1500">
             <Image src='/assets/kit 5.png' width={180} height={180} alt="Kit Image" className="w-full h-48 duration-500 hover:scale-105" />
             <p className="text-2xl font-bold text-center"> Power Bank </p>
           </div>
 
-          <div>
+          <div data-aos="flip-up" data-aos-duration="1500">
             <Image src='/assets/kit 3.png' width={180} height={180} alt="Kit Image" className="w-full h-48 duration-500 hover:scale-105" />
             <p className="text-2xl font-bold text-center"> First Aid Box </p>
           </div>

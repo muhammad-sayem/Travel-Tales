@@ -1,8 +1,5 @@
 export const dynamic = 'force-dynamic';
-
-import BlogCard from "./components/BlogCard";
-import SearchBlog from "./components/SearchAndShowBlog";
-import SortBlogs from "./components/SortBlogs";
+import SearchAndShowBlog from "./components/SearchAndShowBlog";
 
 const getAllBlogs = async () => {
   try {
@@ -31,7 +28,7 @@ const Blogs = async () => {
 
     <div className="w-10/12 mx-auto py-24">
       <div className="pb-8">
-        <SearchBlog allBlogs={allBlogs} />
+        <SearchAndShowBlog allBlogs={allBlogs} />
       </div>
 
     </div>

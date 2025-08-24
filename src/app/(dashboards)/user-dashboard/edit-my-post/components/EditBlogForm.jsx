@@ -48,7 +48,7 @@ const EditBlogForm = ({ singleBlogData }) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4 sm:px-6 md:px-8">
+    <div className="flex justify-center items-center min-h-screen px-4 sm:px-6 md:px-8" data-aos="zoom-in" data-aos-duration="1500">
       <form
         onSubmit={handleEditBlog}
         className="bg-white shadow-lg rounded-lg p-6 sm:p-8 md:p-10 w-full max-w-3xl space-y-4"
@@ -132,7 +132,7 @@ const EditBlogForm = ({ singleBlogData }) => {
 
         <button
           type="submit"
-          className="w-full bg-[#59815B] hover:bg-[#3a573b] text-white font-semibold py-3 rounded-lg transition duration-200"
+          className="btn w-full bg-[#59815B] hover:bg-[#3a573b] text-white font-semibold py-3 rounded-lg transition duration-200"
         >
           Confirm
         </button>

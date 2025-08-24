@@ -18,7 +18,7 @@ const PendingPosts = async () => {
   console.log("Pending Posts ---------> ", pendingPosts);
 
   return (
-    <div className="w-11/12 mx-auto py-8">
+    <div className="w-11/12 mx-auto py-8" data-aos="zoom-in" data-aos-duration="1500">
       <h3 className="text-3xl sm:text-4xl text-center text-[#59815B] font-black my-8">
         Pending Posts
       </h3>

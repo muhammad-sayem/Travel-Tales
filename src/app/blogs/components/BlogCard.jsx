@@ -8,7 +8,8 @@ const BlogCard = ({ blog }) => {
 
   return (
     <Link href={`/blogs/${blog._id}`}>
-      <div className="shadow-lg p-4 bg-[#EDEAE1] h-[470px] transition-transform duration-300 hover:scale-105">
+      <div className="shadow-lg p-4 bg-[#EDEAE1] h-[470px] transition-transform duration-300 hover:scale-105" data-aos="zoom-in"
+        data-aos-duration="1500">
         <Image
           src={travelImage}
           width={300}

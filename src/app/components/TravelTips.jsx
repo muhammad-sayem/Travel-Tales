@@ -8,7 +8,9 @@ const TravelTips = () => {
       </h3>
 
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-16 mb-16">
-        <div className="w-full lg:w-1/2">
+
+        <div className="w-full lg:w-1/2" data-aos="fade-right"
+        data-aos-duration="1500">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase mb-4">
             Versatile Gear for Every Journey
           </h2>
@@ -17,7 +19,7 @@ const TravelTips = () => {
           </p>
         </div>
 
-        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end" data-aos="fade-left" data-aos-duration="1500">
           <Image 
             src='/assets/tips image 1.webp' 
             width={500} 
@@ -29,7 +31,9 @@ const TravelTips = () => {
       </div>
 
       <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-10 lg:gap-16">
-        <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
+
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-start" data-aos="fade-right"
+        data-aos-duration="1500">
           <Image 
             src='/assets/tips image 2.webp' 
             width={500} 
@@ -39,7 +43,8 @@ const TravelTips = () => {
           />
         </div>
 
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2" data-aos="fade-left"
+        data-aos-duration="1500">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase mb-4">
             Health & Safety First Kit
           </h2>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "ldrs": "^1.1.7",

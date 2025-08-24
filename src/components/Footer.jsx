@@ -6,7 +6,7 @@ import { FaSquareInstagram } from "react-icons/fa6";
 const Footer = () => {
   return (
     <div className="bg-[#242625]">
-      <div className="w-11/12 mx-auto text-white flex flex-col md:flex-row gap-y-12 md:gap-y-0 md:gap-x-8 py-12 md:py-16">
+      <div className="w-9/12 mx-auto text-white flex flex-col md:flex-row gap-y-12 md:gap-y-0 md:gap-x-8 py-12 md:py-16">
         
         <div className="md:w-3/5">
           <div className="flex items-center mb-4">

@@ -22,7 +22,7 @@ const Navbar = () => {
       <li>
         <Link
           href="/"
-          className="text-[#ECEBE1] hover:text-[#59815B]"
+          className="text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#EDEAE1] hover:font-bold"
         >
           Home
         </Link>
@@ -30,7 +30,7 @@ const Navbar = () => {
       <li>
         <Link
           href="/blogs"
-          className="text-[#ECEBE1] hover:text-[#59815B]"
+          className="text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#EDEAE1] hover:font-bold"
         >
           All Blogs
         </Link>
@@ -41,7 +41,7 @@ const Navbar = () => {
           className={`${
             status === "loading"
               ? "text-gray-400 cursor-not-allowed"
-              : "text-[#ECEBE1] hover:text-[#59815B]"
+              : "text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#EDEAE1] hover:font-bold"
           }`}
         >
           Add Blog
@@ -54,7 +54,7 @@ const Navbar = () => {
               ? "/user-dashboard/my-profile"
               : "/admin-dashboard/my-profile"
           }
-          className="text-[#ECEBE1] hover:text-[#59815B]"
+          className="text-[#ECEBE1] hover:text-[#59815B] hover:bg-[#EDEAE1] hover:font-bold"
         >
           Dashboard
         </Link>

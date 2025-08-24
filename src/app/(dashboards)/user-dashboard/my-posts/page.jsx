@@ -31,7 +31,8 @@ const MyPosts = async () => {
       </h3>
 
       {myPosts.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" data-aos="zoom-in"
+          data-aos-duration="1500">
           <table className="table-auto w-full border-collapse border border-gray-300">
             <thead className="bg-[#59815B] text-white">
               <tr>

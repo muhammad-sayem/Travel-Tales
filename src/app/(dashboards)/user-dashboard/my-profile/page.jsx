@@ -11,7 +11,8 @@ const UserMyProfile = async () => {
 
   return (
     <div className="flex justify-center items-center min-h-[80vh] bg-gray-50 p-4">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center border border-gray-200">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center border border-gray-200" data-aos="zoom-in"
+        data-aos-duration="1500">
         {/* Profile Image */}
         <div className="flex justify-center">
           <img

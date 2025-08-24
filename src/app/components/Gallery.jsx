@@ -9,7 +9,9 @@ const Gallery = () => {
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 mb-4">
-          <div className="shadow-xl lg:col-span-3">
+
+          <div className="shadow-xl lg:col-span-3" data-aos="zoom-in"
+        data-aos-duration="1500">
             <Image 
               src='/assets/gallery 1.webp' 
               width={400} 
@@ -18,7 +20,8 @@ const Gallery = () => {
               className="w-full h-60 sm:h-72 lg:h-72 object-cover transition-transform duration-500 hover:scale-95 rounded-md"
             />
           </div>
-          <div className="shadow-xl lg:col-span-3">
+          <div className="shadow-xl lg:col-span-3" data-aos="zoom-in"
+        data-aos-duration="1500">
             <Image 
               src='/assets/gallery 2.webp' 
               width={400} 
@@ -27,7 +30,8 @@ const Gallery = () => {
               className="w-full h-60 sm:h-72 lg:h-72 object-cover transition-transform duration-500 hover:scale-95 rounded-md"
             />
           </div>
-          <div className="shadow-xl lg:col-span-6">
+          <div className="shadow-xl lg:col-span-6" data-aos="zoom-in"
+        data-aos-duration="1500">
             <Image 
               src='/assets/gallery 3.webp' 
               width={400} 
@@ -39,7 +43,8 @@ const Gallery = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
-          <div className="shadow-xl lg:col-span-6">
+          <div className="shadow-xl lg:col-span-6" data-aos="zoom-in"
+        data-aos-duration="1500">
             <Image 
               src='/assets/gallery 4.webp' 
               width={400} 
@@ -48,7 +53,8 @@ const Gallery = () => {
               className="w-full h-60 sm:h-72 lg:h-72 object-cover transition-transform duration-500 hover:scale-95 rounded-md"
             />
           </div>
-          <div className="shadow-xl lg:col-span-3">
+          <div className="shadow-xl lg:col-span-3" data-aos="zoom-in"
+        data-aos-duration="1500">
             <Image 
               src='/assets/gallery 5.webp' 
               width={400} 
@@ -57,7 +63,8 @@ const Gallery = () => {
               className="w-full h-60 sm:h-72 lg:h-72 object-cover transition-transform duration-500 hover:scale-95 rounded-md"
             />
           </div>
-          <div className="shadow-xl lg:col-span-3">
+          <div className="shadow-xl lg:col-span-3" data-aos="zoom-in"
+        data-aos-duration="1500">
             <Image 
               src='/assets/gallery 6.webp' 
               width={400} 
