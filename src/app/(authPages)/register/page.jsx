@@ -4,7 +4,7 @@ import GoogleSignIn from "@/components/GoogleSignIn";
 
 const RegisterPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-32">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-32 pb-16">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-[#59815B] text-center">Create an Account</h2>
 
