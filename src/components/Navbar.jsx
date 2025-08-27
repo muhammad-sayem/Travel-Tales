@@ -148,7 +148,7 @@ const Navbar = () => {
               )}
               <button
                 onClick={() => signOut({ callbackUrl: "/login" })}
-                className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b]"
+                className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b] border-none"
               >
                 Logout
               </button>
@@ -157,13 +157,13 @@ const Navbar = () => {
             <div className="flex gap-x-2">
               <Link
                 href="/login"
-                className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b]"
+                className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b] border-none"
               >
                 Login
               </Link>
               <Link
                 href="/register"
-                className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b]"
+                className="btn bg-[#59815B] text-[#ECEBE1] px-3 md:px-5 hover:bg-[#3a573b] border-none"
               >
                 Register
               </Link>
